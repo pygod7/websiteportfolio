@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubin Bastakoti | Backend Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00d4ff;
+            --text: #e0f0ff;
+            --text-light: #a0b8cc;
+            --bg: #0a0f1c;
+            --card: #111827;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 15, 28, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            padding: 1.2rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 6%;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero .highlight {
+            color: var(--primary);
+        }
+
+        .subtitle {
+            font-size: 1.35rem;
+            color: var(--text-light);
+            margin-bottom: 1.8rem;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #000;
+        }
+
+        section {
+            padding: 110px 6%;
+        }
+
+        .section-title {
+            font-size: 2.6rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), #00a8cc);
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 320px;
+            height: 320px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #1e2937, #334155);
+            border: 4px solid rgba(0, 212, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card {
+            background: var(--card);
+            padding: 2.2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 212, 255, 0.08);
+            transition: all 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--card);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(0, 212, 255, 0.15);
+        }
+
+        .project-img {
+            height: 220px;
+            background: #1e2937;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary);
+        }
+
+        .achievement {
+            background: linear-gradient(135deg, #1e2937, #0f172a);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin: 5rem 0;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background: #1e2937;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background: #05070f;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .nav-links { gap: 1.5rem; font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">RUBIN<span>B</span></div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hello, I'm <span class="highlight">Rubin Bastakoti</span></h1>
+            <p class="subtitle">Backend Developer &amp; Security Researcher</p>
+            <p style="font-size:1.15rem; max-width:620px; color:var(--text-light);">
+                Passionate about building secure, scalable, and high-performance backend systems. 
+                Meta Bug Bounty recipient with strong expertise in Python and system security.
+            </p>
+            
+            <div style="margin-top: 2.5rem;">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-outline" style="margin-left: 15px;">Get In Touch</a>
+            </div>
+
+            <div style="margin-top: 3rem; display:flex; gap:2rem; flex-wrap:wrap;">
+                <div>
+                    <h3 style="color:var(--primary); font-size:2.2rem;">5+</h3>
+                    <p style="color:var(--text-light);">Projects Completed</p>
+                </div>
+                <div>
+                    <h3 style="color:var(--primary); font-size:2.2rem;">$1.5K+</h3>
+                    <p style="color:var(--text-light);">Bug Bounty Earned</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+            <div class="profile-img">
+                <i class="fas fa-user-tie"></i>
+            </div>
+            <div>
+                <h3 style="font-size:1.8rem; margin-bottom:1rem;">Backend Engineer &amp; Cybersecurity Enthusiast</h3>
+                <p style="font-size:1.1rem; color:var(--text-light);">
+                    I'm an 18-year-old BCA student from Nepal with a deep passion for backend development and application security. 
+                    I specialize in building robust APIs and secure systems using modern Python technologies.
+                </p>
+                <br>
+                <p style="font-size:1.1rem; color:var(--text-light);">
+                    Currently focused on FastAPI, PostgreSQL, and secure architecture. I believe security should be 
+                    integrated from the very first line of code.
+                </p>
+                
+                <div style="margin-top:2rem;">
+                    <h4>Currently Learning:</h4>
+                    <p>Docker • Kubernetes • System Design • Advanced Security</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" style="background:#0f172a;">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="card">
+                <h3><i class="fab fa-python"></i> Python Ecosystem</h3>
+                <p>FastAPI, Flask, Django, Asyncio, Pydantic, SQLAlchemy</p>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-shield-alt"></i> Security</h3>
+                <p>Bug Bounty, Secure Coding, OAuth2, JWT, Input Validation</p>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-database"></i> Databases &amp; Tools</h3>
+                <p>PostgreSQL, Redis, Alembic, Docker, Git</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievement -->
+    <div class="achievement">
+        <h2 style="color:var(--primary); font-size:2.4rem; margin-bottom:1rem;">
+            <i class="fas fa-trophy"></i> Meta Bug Bounty Winner
+        </h2>
+        <p style="font-size:1.35rem; max-width:700px; margin:0 auto 1rem;">
+            Discovered a critical vulnerability in Instagram's Meta Verified subscription system.
+        </p>
+        <p style="font-size:1.4rem; font-weight:600;">Reward: $1,575 USD • January 2026</p>
+    </div>
+
+    <!-- Projects -->
+    <section id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-img"><i class="fas fa-graduation-cap"></i></div>
+                <div style="padding:1.8rem;">
+                    <h3>Online Education Platform</h3>
+                    <p style="margin:12px 0; color:var(--text-light);">Backend for a popular Nepali education YouTube channel serving 1000+ daily users.</p>
+                    <p><strong>Tech:</strong> FastAPI • PostgreSQL • JWT Auth</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img"><i class="fab fa-discord"></i></div>
+                <div style="padding:1.8rem;">
+                    <h3>Discord Bot Management Client</h3>
+                    <p style="margin:12px 0; color:var(--text-light);">Android application for managing Discord bots remotely.</p>
+                    <p><strong>Tech:</strong> Kotlin • Discord API</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img"><i class="fas fa-brain"></i></div>
+                <div style="padding:1.8rem;">
+                    <h3>Tenshi - Gemini API Wrapper</h3>
+                    <p style="margin:12px 0; color:var(--text-light);">Clean and type-safe Python wrapper for Google's Gemini AI.</p>
+                    <p><strong>Tech:</strong> Python • Pydantic • Published on PyPI</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="background:#0f172a;">
+        <h2 class="section-title">Let's Work Together</h2>
+        <div style="max-width:700px; margin:0 auto;">
+            <form id="contactForm" class="contact-form" style="display:grid; gap:1.2rem;">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Tell me about your project..." rows="6" required></textarea>
+                <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; font-size:1.1rem; padding:16px;">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Rubin Bastakoti • Nepal</p>
+        <p style="margin-top:8px;">
+            <a href="mailto:exerubin144@gmail.com" style="color:var(--primary);">exerubin144@gmail.com</a>
+        </p>
+    </footer>
+
+    <script>
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("✅ Thank you! I'll get back to you within 24 hours.");
+            this.reset();
+        });
+
+        console.log("%cRubin Bastakoti - Professional Portfolio Loaded", "color:#00d4ff; font-size:14px;");
+    </script>
+</body>
+</html> 
